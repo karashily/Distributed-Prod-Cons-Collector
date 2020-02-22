@@ -15,11 +15,9 @@ def consumer_otsu(port_rcv, port_snd, consumer_num):
     zmqSocket_snd = context.socket(zmq.PUSH)
     zmqSocket_snd.connect("tcp://127.0.0.1:"+str(port_snd))
 
-
-    img_gray = rgb2gray(zmqSocket_rcv.recv_pyobj())
-    thresh = threshold_otsu(img_gray)
-    binary_img = np.zeros((img_gray.shape[0],img_gray.shape[1]))
-    binary_img[img_gray >= thresh] = 1
-    zmqSocket_snd.send_pyobj(binary_img)
-
-consumer_otsu(5557, 5558, 1)
+    while True:
+        img_gray = rgb2gray(zmqSocket_rcv.recv_pyobj())
+        thresh = threshold_otsu(img_gray)
+        binary_img = np.zeros((img_gray.shape[0],img_gray.shape[1]))
+        binary_img[img_gray >= thresh] = 1
+        zmqSocket_snd.send_pyobj(binary_img)
