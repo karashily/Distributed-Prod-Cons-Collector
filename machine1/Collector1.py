@@ -15,6 +15,6 @@ def collector1(port_rcv, port_snd, collector_num):
     # zmqSocket_snd = context.socket(zmq.PUSH)
     # zmqSocket_snd.bind("tcp://127.0.0.1:"+str(port_snd))
     while True:
-        img = zmqSocket_rcv.recv_pyobj()
+        data = zmqSocket_rcv.recv_pyobj()
         print("image received by collector" + str(collector_num))
         # zmqSocket_snd.send_pyobj(img)

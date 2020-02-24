@@ -18,11 +18,14 @@ def producer(port):
     if not cap.isOpened():
         raise IOError("Cannot open webcam")
 
+    frame_number = 1
     while True:
         ret, rgb_frame = cap.read()
         cv2.imshow('Input', rgb_frame)
-        zmqSocket.send_pyobj(rgb_frame)
+        message = {'img' : rgb_frame , 'frame_number' : frame_number}
+        zmqSocket.send_pyobj(message)
         c = cv2.waitKey(1)
+        frame_number += 1
         if c == 27:
             break
 
