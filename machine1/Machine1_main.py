@@ -14,7 +14,7 @@ import matplotlib.image as mpimg
 n = int(sys.argv[1])
 prod_snd = cons_rcv = 49152
 init_port1 = init_port2 = 49153
-inti_port3 = init_port1+n+1
+inti_port3 = 49162
 
 prod_thread = threading.Thread(target=producer, args=[prod_snd])
 prod_thread.start()
