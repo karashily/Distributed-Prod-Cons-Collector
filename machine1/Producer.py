@@ -7,13 +7,13 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import cv2
 
-def producer(port):
+def producer(video_path, port, n):
 
     context = zmq.Context()
     zmqSocket = context.socket(zmq.PUSH)
     zmqSocket.bind("tcp://127.0.0.1:"+str(port))
 
-    cap = cv2.VideoCapture("karashily.mp4")
+    cap = cv2.VideoCapture(video_path)
     # Check if the webcam is opened correctly
     if not cap.isOpened():
         raise IOError("Cannot open webcam")
