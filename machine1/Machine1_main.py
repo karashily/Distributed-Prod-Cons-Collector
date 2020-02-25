@@ -25,7 +25,7 @@ for i in range((n+1)//2):
         cons_thread = threading.Thread(target=consumer_otsu, args=[cons_rcv, init_port1, cons_num])
         cons_thread.start()
         cons_num += 1
-        init_port1 += 1
+    init_port1 += 1
 
 for i in range((n+1)//2):
     coll_thread = threading.Thread(target=collector1, args=[init_port2, inti_port3, i+1])
