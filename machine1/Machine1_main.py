@@ -11,8 +11,8 @@ import skimage.io as io
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-# n = int(sys.argv[1])
-n = 1
+n = int(sys.argv[1])
+
 prod_snd = cons_rcv = 49152
 init_port1 = init_port2 = 49153
 inti_port3 = 49162

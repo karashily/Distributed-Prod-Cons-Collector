@@ -18,9 +18,8 @@ def consumer_otsu(port_rcv, port_snd, consumer_num):
 
     while True:
         data = zmqSocket_rcv.recv_pyobj()
-        print("frame {} received by otsu consumer".format(data['frame_number']))
+        print("frame {} received by otsu consumer".format(data['frame_number']) + str(consumer_num))
         img_gray = cv2.cvtColor(data['img'], cv2.COLOR_BGR2GRAY)
-        # img_gray = rgb2gray(data['img'])
         thresh = threshold_otsu(img_gray)
         binary_img = np.zeros((img_gray.shape[0],img_gray.shape[1]), dtype=np.uint8)
         binary_img[img_gray >= thresh] = 1

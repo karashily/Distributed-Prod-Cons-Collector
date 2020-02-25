@@ -1,21 +1,20 @@
 from collector_final import *
 from consumer_contours import *
 import random
-
+import threading
+import sys
 
 # read n from conf file
 
-n = 1
+n = int(sys.argv[1])
 recv_init_port = 49162
 
 i = 0
-cons_ids = []
 for j in range(n):
-    id = int(random.random())
-    if(id not in cons_ids):
-        consumer_contours(recv_init_port + i, 1314, id)
-        cons_ids.append(id)
-        if(j%2==1):
-            i += 1
+    cons_cont = threading.Thread(target=consumer_contours, args=[recv_init_port+i, 1314, j+1])
+    cons_cont.start()
+    if(j%2==1):
+        i += 1
 
-collector_final(1314)
+coll_final = threading.Thread(target=final_collector, args=[1314])
+coll_final.start()
