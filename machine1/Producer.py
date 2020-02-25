@@ -13,20 +13,23 @@ def producer(port):
     zmqSocket = context.socket(zmq.PUSH)
     zmqSocket.bind("tcp://127.0.0.1:"+str(port))
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture("karashily.mp4")
     # Check if the webcam is opened correctly
     if not cap.isOpened():
         raise IOError("Cannot open webcam")
 
     frame_number = 1
-    while True:
+    while(cap.isOpened()):
         ret, rgb_frame = cap.read()
-        cv2.imshow('Input', rgb_frame)
-        message = {'img' : rgb_frame , 'frame_number' : frame_number}
-        zmqSocket.send_pyobj(message)
-        c = cv2.waitKey(1)
-        frame_number += 1
-        if c == 27:
+        if ret == True:
+            cv2.imshow('Input', rgb_frame)
+            message = {'img' : rgb_frame , 'frame_number' : frame_number}
+            zmqSocket.send_pyobj(message)
+            frame_number += 1
+            c = cv2.waitKey(1)
+            if c == 27:
+                break
+        else:
             break
 
     cap.release()

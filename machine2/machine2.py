@@ -5,7 +5,7 @@ import random
 
 # read n from conf file
 
-n = 5
+n = 1
 recv_init_port = 49162
 
 i = 0

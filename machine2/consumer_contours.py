@@ -18,6 +18,8 @@ def consumer_contours(recv_port, send_port, consumer_id):
         img = recv_data['img']
         frame_num = recv_data['frame_number']
         
+        print("Frame {} Received by contour consumer".format(frame_num))
+
         # processing
         contours = cv2.findContours(img, mode=cv2.RETR_LIST, method=cv2.CHAIN_APPROX_SIMPLE)
         
